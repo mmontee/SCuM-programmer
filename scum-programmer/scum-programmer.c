@@ -412,7 +412,7 @@ void uarts_init(void) {
     // enable interrupts
     NVIC_SetPriority(UARTE1_IRQn, 2);
     NVIC_ClearPendingIRQ(UARTE1_IRQn);
-    NVIC_EnableIRQ(UARTE1_IRQn);
+    //NVIC_EnableIRQ(UARTE1_IRQn);
 }
 
 //=========================== interrupt handlers ==============================
@@ -479,7 +479,8 @@ void TIMER2_IRQHandler(void) {
 }
 
 void UARTE0_UART0_IRQHandler(void) {
-
+    // Disable UARTE1, avoids reseting nrf between SCuM writes.
+    NVIC_DisableIRQ(UARTE1_IRQn);
     uint8_t uart_rx_byte;
     if (app_dbg.num_ISR_UARTE0_UART0_IRQHandler == 0) {
         app_vars.scum_programmer_state = PROGRAMMER_SRAM_LD_ST;
@@ -654,7 +655,9 @@ void UARTE0_UART0_IRQHandler(void) {
             app_vars.calibration_counter = 0;
             app_dbg.num_TIMER2_IRQHandler = 0;
             NRF_TIMER2->TASKS_START = 1UL;
-
+            
+            // Now that we have written to SCuM turn on the UARTE1 IRQ.
+            NVIC_EnableIRQ(UARTE1_IRQn);
 
         }
     }
@@ -715,4 +718,3 @@ void UARTE1_IRQHandler(void) {
         while (NRF_UARTE0->EVENTS_TXSTARTED == 0x00000000);
     }
 }
-
