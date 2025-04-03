@@ -8,7 +8,7 @@ The Single Chip micro-Mote (SCuM) is a 2x3mm2 single-chip standard-compatible Sm
 
 ### program the nRF52840-DK
 
-    Refer to "Getting Started SCµM.pdf" section 1.1 for details on programming the nRF52840-DK using the SEGGER embedded studio.
+Refer to "Getting Started SCµM.pdf" section 1.1 for details on programming the nRF52840-DK using the SEGGER embedded studio.</br>
 
 ![](static/round_and_round.gif)
 
@@ -27,16 +27,21 @@ The Single Chip micro-Mote (SCuM) is a 2x3mm2 single-chip standard-compatible Sm
 
 ### load code onto SCuM
 
-scum_nrf_programmer.py is used to program SCuM using a pre-compiled binary.
-The nRF52840-DK's COM port must be added to the script.
-The desired binary is added to the script.(pay attention,\ -> /)
+-scum_nrf_programmer.py is used to program SCuM using a pre-compiled binary.</br>
+-The nRF52840-DK's COM port must be added to the script.</br>
+-The desired binary is added to the script.(pay attention,\ -> /)</br>
+
 ![](static/scum_nrf_programmer_user_params.png)
-Execute the script from CL. (> python3 .\scum_nrf_programmer.py)
-After a successful write the script will transition to serial receive mode printing messages transmitted from SCuM to the terminal.
+
+-Execute the script from CL. (> python3 .\scum_nrf_programmer.py)</br>
+-After a successful write the script will transition to serial receive mode printing messages transmitted from SCuM to the terminal.</br>
+
 ![](static/scum_nrf_programmer_receive.png)
-*Notes - The calibration codes and other information transmitted during calibration/initialization are lost. 
-The nRF52840-DK is limited to a a set of pre-defined baud rates. This can cause problems depending on the clock source used. HF clock works/LF clock will not.  
-This modification has only been used and tested for SCuM message transmissions. No attempt has been made to test SCuM message receive capability.
+
+Notes:
+- The calibration codes and other information transmitted during calibration/initialization are lost. </br>
+-The nRF52840-DK is limited to a a set of pre-defined baud rates. This can cause problems depending on the clock source used. HF clock works/LF clock will not.  </br>
+-This modification has only been used and tested for SCuM message transmissions. No attempt has been made to test SCuM message receive capability.</br>
 
 ### calibrate SCuM
 
